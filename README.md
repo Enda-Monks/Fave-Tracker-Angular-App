@@ -1,4 +1,4 @@
-# Fave-Tracker-Angular-App
+# Fave Tracker Angular App
 
 My final project for Seneca's WEB422. The Angular app fetches real data from Spotiy's Web API and 
 allows registered users to search for and save their favourite tracks. The user data is stored in a MongoDB 
