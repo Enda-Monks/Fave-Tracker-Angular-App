@@ -1,0 +1,59 @@
+<div class ="album">
+    <header class="album-header">
+            <h1>{{album.name}}</h1>
+    </header>
+    <p class="album-paragraph">Full track listing for {{album.name}}</p>
+    <p>Click the <mat-icon mat-list-icon>queue_music</mat-icon> icon to <strong>add</strong> a song to your favourites list</p>
+</div>
+
+<mat-card>
+    <mat-card-content fxLayout="row wrap" fxLayout.xs="column">
+        <div fxflex><img [src]="album.images[1].url" alt="album cover" [style.margin]="'10px'" [style.max-width]="'90%'" /></div>
+        <div fxFlex>
+            <div [style.min-width]="'300px'" [style.margin]="'10px'">
+                <strong>Record Label: </strong>{{album.label}}<br />
+                <strong>Release Date: </strong> {{album.release_date}}<br /><br />
+                <strong>Tracks:</strong> {{album.total_tracks}}<br />
+                <strong>Popularity: </strong>{{album.popularity}}<br /><br />
+
+                <mat-chip-list aria-label="Artist selection" *ngFor="let artist of album.artists">
+                    <a [routerLink]="['/artist', artist.id]">
+                        <mat-chip>{{ artist.name }}</mat-chip>
+                    </a>            
+                </mat-chip-list>
+                <br />
+
+                <div>{{album.copyrights[0].text}}</div>
+                <div *ngIf="album.copyrights.length == 2">{{album.copyrights[1].text}}</div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<br /><br />
+<h2>Track Listing</h2>
+
+<mat-list>
+    <div *ngFor="let track of album.tracks.items">
+    <!-- Single "Responsive" Material List Item-->
+    <mat-list-item>
+        <mat-icon mat-list-icon (click)="addToFavourites(track.id)">queue_music</mat-icon>
+        <div mat-line>
+            <mat-card>
+                <mat-card-content>
+                    {{track.disc_number}}: {{track.name}} - {{(track.duration_ms / 60000).toFixed(2)}} 
+                    <div *ngIf="track.preview_url">
+                        <br />
+                        <audio controls [src]="track.preview_url"></audio>
+                    </div>
+                </mat-card-content>
+                
+            </mat-card>
+        </div>
+    </mat-list-item>
+    <!-- -->
+    </div>
+</mat-list>
+<div>
+    <p class="album-paragraph">Full track listing for {{album.name}}</p>
+    <p>Click the <mat-icon mat-list-icon>queue_music</mat-icon> icon to <strong>add</strong> a song to your favourites list</p>
+</div>
